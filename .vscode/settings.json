@@ -1,0 +1,10 @@
+{
+    "intelephense.environment.includePaths": [
+        "C:/Users/VC FONTANILLA/Local Sites/wptest/app/public/wp-includes",
+        "C:/Users/VC FONTANILLA/Local Sites/wptest/app/public/wp-admin",
+        "C:/Users/DELL/Local Sites/local-sites/app/public/wp-admin",
+        "C:/Users/DELL/Local Sites/local-sites/app/public/wp-includes",
+        "C:/Users/vonfo/Local Sites/local-sites/app/public/wp-admin",
+        "C:/Users/vonfo/Local Sites/local-sites/app/public/wp-includes"
+    ]
+}

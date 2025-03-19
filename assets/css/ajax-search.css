@@ -1,0 +1,597 @@
+/* <style> */
+        /* Import the Archivo font */
+        @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap');
+
+        /* Apply Archivo font to all text */
+        body, .input-box, .searchbutton, .filterbutton, h2, p, button, .split-button-container, .filter-button {
+            font-family: 'Archivo', sans-serif;
+        }
+
+        #property-count {
+            font-family: 'Archivo', sans-serif;
+        }
+
+        .card-text h4 {
+            color: #f93f32;
+        }
+
+        .price-info {
+            color: #f93f32 !important;
+        }
+
+        .price-info span {
+            color: #f93f32;
+        }
+
+        .card-title h5 {
+            color: #f93f32;
+        }
+
+        /* Styles for the second section (300+ properties with a border separator) */
+        .second-section {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            margin-top: 20px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        /* Styles for the filter button */
+        .filterbutton {
+            padding: 10px 20px;
+            background-color: white;
+            color: #005bb5;
+            border: 2px solid #005bb5; 
+            border-radius: 30px; 
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            /* width: 118.46px; */
+            /* height: 40px; */
+        }
+
+        /* Styles for input boxes */
+        .input-box {
+            flex: 1;
+            padding: 10px 15px;
+            border: none !important; /* Ensure the border is removed */
+            outline: none !important; /* Ensure the outline is removed */
+            font-size: 14px;
+            width: 100%; /* Make the input take up the remaining space */
+            transition: all 0.3s ease;
+        }
+
+        .input-box:focus {
+            box-shadow: 0 0 4px rgba(0, 115, 230, 0.4); /* Optional: Add focus effect with shadow */
+        }
+
+        /* Styles for the search button */
+        .searchbutton {
+            flex: 1;
+            padding: 10px 10px;
+            background-color: #F93E32;
+            color: #fff;
+            border: 1.5px solid transparent;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 150px;
+            height: 48px;
+        }
+
+        /* Wrapper for each input with border */
+        .wrapperlocation {
+            display: flex;
+            flex: 1 1 200px;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .wrapperlocation2 {
+            display: flex;
+            position: relative;
+            /* display: inline-block; */
+            flex: 1 1 200px;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .guest-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%; /* Adjust dropdown position */
+            left: 0;
+            width: 100%;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            z-index: 10;
+        }
+
+        .guest-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+
+        .counter {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .counter button {
+            background: #eee;
+            border: 1px solid #ccc;
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #666;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+        }
+
+        .counter span {
+            font-size: 16px;
+            font-weight: bold;
+            min-width: 25px;
+            text-align: center;
+        }
+
+        .wrapperlocations {
+            display: flex;
+            align-items: center;
+            flex: 1 1 200px;
+            background-color: #fff;
+        }
+
+        /* Location Icon */
+        .location-icon {
+            width: 20px; /* Set the width of the image */
+            height: 20px; /* Set the height of the image */
+            margin-right: 1px; /* Add some space between the icon and the input */
+        }
+
+        .filter-button {
+            display: flex; /* Ensures icon and text are aligned horizontally */
+            align-items: center; /* Vertically centers the icon and text */
+            justify-content: center; /* Centers content within the button */
+            background-color: #F93E32; /* Button background color */
+            color: #fff; /* Text color */
+            border: none; /* Removes default border */
+            border-radius: 30px; /* Rounded corners */
+            padding: 10px 20px; /* Padding inside the button */
+            font-size: 16px; /* Font size for the text */
+            font-weight: bold; /* Bold text */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s ease; /* Smooth hover transition */
+            height: 40px;
+        }
+
+        .filter-button:hover {
+            background-color: #d8352b; /* Slightly darker shade on hover */
+        }
+        
+        .searchbutton:hover {
+            background-color: #d8352b; /* Slightly darker shade on hover */
+        }
+
+        .filter-icon {
+            width: 20px;
+            margin-right: 8px;
+            filter: brightness(0) invert(1);
+        }
+
+        .split-button-container{
+            display: flex;
+            align-items: center;
+        }
+
+        .split-button {
+            display: flex;
+            border-radius: 5px;
+            width: 100px;
+            height: 30px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .split-button .left,
+        .split-button .right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Left part with Map Icon */
+        .split-button .left {
+            border: 1px solid #ddd;
+        }
+
+        .split-button .left img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .split-button .right img {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Right part with Grid Icon */
+        .split-button .right {
+            border: 1px solid #ddd;
+        }
+
+        .split-button .right:hover {
+            background-color: #FFD3B6; /* Darker blue on hover */
+        }
+
+        .split-button .left:hover {
+            background-color: #FFD3B6; /* Darker blue on hover */
+        }
+
+        .property-cards-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Adjust for responsiveness */
+            gap: 20px; /* Consistent spacing between cards */
+            padding: 20px;
+            height: 100%;
+        }
+
+        .property-cards-container2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .property-card {
+            /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Ensures cards stretch evenly */
+            flex: 1;
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Makes content stretch */
+            height: 100%;
+        }
+
+        .card-title {
+            color: rgb(127, 157, 166);
+            font-family: 'Archivo', sans-serif;
+            font-size: 16px;
+            line-height: 24px;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-titleSeg {
+            justify-content: space-between;
+        }
+
+        .segment-badge {
+            background: #f93f32;
+            color: #fff;
+            font-size: 14px;
+            padding: 2px 12px;
+            border-radius: 4px;
+        }
+
+        .card-text {
+            color: rgb(0, 59, 77);
+            font-family: 'Archivo', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 24px;
+            align-content: center;
+            justify-content: center;
+        }
+
+        .loc {
+            margin-top: 10px;
+        }
+
+        .price-info {
+            margin-top: auto;
+            color: rgb(0, 59, 77);
+            font-family: 'Archivo', sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 28px;
+        }
+
+        .card-footer {
+            border-top: 1px solid rgb(224, 223, 223);
+            padding: 16px 8px 0;
+            font-size: 14px;
+        }
+
+        .details, .amenities {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .details li, .amenities li {
+            border-right: 1.5px solid rgb(204, 215, 219);
+            padding-right: 8px;
+        }
+
+        .details li:last-child, .amenities li:last-child {
+            border-right: none;
+        }
+
+        @media (max-width: 1200px) {
+            .property-cards-container {
+                grid-template-columns: repeat(3, 1fr); /* 3 cards per row on medium screens */
+            }
+            .search-section-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .property-cards-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 cards per row on small screens */
+            }
+            .wrapperlocation {
+                flex: 1 1 100%; /* Stack items vertically on small screens */
+            }
+            .wrapperlocation2 {
+                flex: 1 1 100%; /* Stack items vertically on small screens */
+            }
+            .guest-dropdown {
+                width: 100%; /* Full width on smaller screens */
+                left: 0;
+                right: 0; /* Ensures it stretches within the container */
+                min-width: 200px;
+            }
+            .guest-option {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .counter {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .counter button {
+                width: 40px; /* Bigger for touch */
+                height: 40px;
+                font-size: 20px;
+            }
+            .counter span {
+                font-size: 18px;
+                min-width: 30px;
+                text-align: center;
+            }
+            /* .property-cardss {
+                display: flex;
+                flex-direction: row;
+                gap: 1rem;
+                padding: 1.4rem;
+            } */
+        }
+
+        @media (max-width: 576px) {
+            .property-cards-container {
+                grid-template-columns: 1fr; /* 1 card per row on extra-small screens */
+            }
+            .property-cardss {
+                display: flex;
+                flex-direction: row;
+                gap: 1rem;
+                padding: 1.9rem;
+            }
+        }
+
+        .search-section-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px; /* Space between items */
+            padding: 16px;
+            justify-content: space-between; /* Distribute items evenly */
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        #grid-view-btn.active, #map-view-btn.active {
+            background-color: #FFD3B6;
+            color: white;
+            cursor: pointer;
+        }
+
+        .location-pin-text {
+            background: url('../../public/icons8-location-50.png') no-repeat left center;
+            padding-left: 30px; /* Adjust padding to fit the icon */
+            background-size: 20px 20px; /* Adjust the size of the icon */
+        }
+
+        .property-carousel .carousel-inner {
+            display: flex !important;
+            height: 100% !important;
+            width: 100% !important;
+        }
+
+        .carousel-inner img {
+            width: 100% !important;
+            height: auto !important;
+            object-fit: cover !important; /* Ensures the image doesn't get distorted */
+        }
+
+        .property-carousel .carousel-item img {
+            object-fit: cover !important; /* Ensure the image covers the entire container */
+            height: 100% !important; /* Stretch the image to the container's height */
+            /* width: 100%; */
+            border-radius: 8px !important; /* Optional: Rounded corners for better design */
+        }
+
+        .property-cardss {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            /* padding: 2.3rem; */
+        }
+
+        .property-carousel {
+            max-width: 300px !important;
+            max-height: 300px !important;
+            overflow: hidden !important;
+            flex-shrink: 0 !important;
+        }
+
+        .property-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            background-color: transparent !important; /* Remove the background color */
+            border: none !important; /* Optional: Remove border if present */
+            box-shadow: none !important; /* Optional: Remove shadow if present */
+        }
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            background-color: transparent !important; /* Ensure no background color on hover */
+            opacity: 1 !important; /* Optional: Retain full visibility */
+        }
+
+        #loading-spinner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000; /* Ensure it's above other content */
+            display: none;
+        }
+
+        .spinner-border {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #28a745;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Smooth transitions for view containers */
+        .property-cards-container, .map-view-containerz {
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+
+        /* Hide containers initially */
+        .property-cards-container.hidden, .map-view-containerz.hidden {
+            opacity: 0;
+            visibility: hidden;
+            display: none;
+        }
+
+        /* Show containers */
+        .property-cards-container.visible, .map-view-containerz.visible {
+            opacity: 1;
+            visibility: visible;
+            display: grid;
+        }
+
+        .price-tag {
+            background-color: #4285F4;
+            border-radius: 8px;
+            color: #FFFFFF;
+            font-size: 14px;
+            padding: 10px 15px;
+            position: relative;
+        }
+
+        .price-tag::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            transform: translate(-50%, 0);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid #4285F4;
+        }
+
+    .property-tag {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Box shadow effect on hover */
+    .property-tag:hover .property-card {
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        transition: box-shadow 0.3s ease-in-out; /* Smooth transition */
+    }
+
+    .property-tag:hover .property-cardss {
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        transition: box-shadow 0.3s ease-in-out; /* Smooth transition */
+    }
+
+    .property-tag .property-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    /* </style> */
