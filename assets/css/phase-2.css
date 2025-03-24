@@ -201,6 +201,23 @@
             position: relative;
         }
 
+        .price-info {
+            color: #f93f32 !important;
+        }
+
+        .price-info span {
+            color: #f93f32;
+        }
+
+        .price-info {
+            margin-top: auto;
+            color: rgb(0, 59, 77);
+            font-family: 'Archivo', sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 28px;
+        }
+
         .segment-badge-content {
             background: #f93f32;
             color: #fff;

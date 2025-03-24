@@ -25,6 +25,7 @@ function csb_enqueue_assets() {
         'bootstrap-js'     => ['https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js', ['jquery']],
         'flatpickr-js'     => ['https://cdn.jsdelivr.net/npm/flatpickr', ['jquery']],
         'custom-datepicker'=> [plugin_dir_url(__FILE__) . 'components/custom-date-picker.js', ['flatpickr-js']],
+        'quotation-datepicker'=> [plugin_dir_url(__FILE__) . 'components/quotation-datepicker.js', ['flatpickr-js']],
         'ajax-search'      => [plugin_dir_url(__FILE__) . 'assets/js/ajax-search.js', ['jquery']],
         'phase-2'          => [plugin_dir_url(__FILE__) . 'assets/js/phase-2.js', ['jquery']],
         'guest-dropdown'   => [plugin_dir_url(__FILE__) . 'assets/js/guest-dropdown.js', ['jquery']],
@@ -201,7 +202,7 @@ function property_detail_shortcode() {
                     Retrieving...
                 </div>
 
-                <div class="div-spacer-border"></div>
+                <div class="div-spacer-border-none"></div>
 
                 <div class="div-map-section" id="div-map-section">
                     <div id="maps" style="height: 300px; width: 100%;"></div>
@@ -216,8 +217,11 @@ function property_detail_shortcode() {
                 </div>
             </div>
 
+            <!--div 2 content-->
             <div class="div2-content">
-
+                <div class="div-quotation" id="div-quotation">
+                    retrieving...
+                </div>
             </div>
         </div>
     </div>
