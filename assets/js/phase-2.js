@@ -521,6 +521,39 @@ jQuery(document).ready(function ($) {
                             <button id="toggle-house-rules" class="read-more-house-rules">Read More about the house rules &#x25BC;</button>
                         `;
 
+                        document.getElementById("div-cancellation").innerHTML = `
+                            <div class="accordion-container">
+                                <h5 class="cancellation-heading">Cancellation Policy</h5>
+                                <h5 class="cancellation-heading">Free cancellation up to 48 hours before check-in (conditions apply)</h5>
+                                
+                                <div class="accordion-item">
+                                    <button class="accordion-header" id="toggle-cancellation-rules">
+                                        View cancellation and refund policy 
+                                        <span class="accordion-icon">▼</span>
+                                    </button>
+                                    
+                                    <div class="accordion-content" id="cancellation-full" style="display: none;">
+                                        <ul>
+                                            <li class="ul-cancellation">Cancellation up to 48 hours before check-in will receive a refund of 100% minus 3% card processing fee</li>
+                                            <li class="ul-cancellation">Cancellation within 48 hours of check-in will receive a refund of 50% minus 10% service fee of the total booking value</li>
+                                        </ul>
+                                        
+                                        <h5 class="cancellation-heading">For any booking of 30 days or more</h5>
+                                        <ul>
+                                            <li class="ul-cancellation">Cancellation up to 14 days before check-in date will receive a refund of 100% minus 3% card processing fee</li>
+                                            <li class="ul-cancellation">Cancellation within 14 days of check-in will receive a full refund minus one week of rent and 10% service fee</li>
+                                            <li class="ul-cancellation">If you cancel after your stay has started or you alter your booking midway through, the remaining nights in the reservation are non-refundable. If you have more than 30 nights left in your reservation, only the next 30 nights are non-refundable (the refund of the remaining nights will be subject to 10% service fee deduction)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <h5 class="cancellation-heading">Safety of our Guests</h5>
+                                <p>When you stay at a MadeComfy, you'll have the convenience of self check-in and space to relax in an entire house or apartment with amenities such as fast wi-fi to stay productive, a kitchen and private laundry facilities. The health and safety of our guests is our paramount priority, which is why our housekeeping teams undertake stringent cleaning to ensure all surfaces are thoroughly disinfected between each stay.</p>
+                            </div>
+                        `;
+
                         // ✅ Attach event listener space
                         document.getElementById("toggle-space").addEventListener("click", function () {
                             const shortText = document.getElementById("space-short");
@@ -552,6 +585,22 @@ jQuery(document).ready(function ($) {
                                 fullText.style.display = "none";
                                 shortText.style.display = "block";
                                 toggleButton.innerHTML = 'Read More about the house rules &#x25BC;';
+                            }
+                        });
+
+                        // ✅ Attach event listener cancellation rules
+                        document.getElementById("toggle-cancellation-rules").addEventListener("click", function() {
+                            const content = document.getElementById("cancellation-full");
+                            const icon = this.querySelector(".accordion-icon");
+                            
+                            if (content.style.display === "none" || content.style.display === "") {
+                                content.style.display = "block";
+                                icon.textContent = "▲";
+                                this.classList.add("active");
+                            } else {
+                                content.style.display = "none";
+                                icon.textContent = "▼";
+                                this.classList.remove("active");
                             }
                         });
                     }

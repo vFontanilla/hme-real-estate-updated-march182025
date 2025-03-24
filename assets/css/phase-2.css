@@ -6,11 +6,11 @@
             font-family: 'Archivo', sans-serif;
         }
 
-        body, h1, h2, #h3-name, h4, #h5-type, h6, .segment-badge-gbb, .space-heading, .guest-access, .local-area, .getting-around, .notes, .amenities-title, .sleeping-header, .h5-availability-header, .house-rules-heading {
+        body, h1, h2, #h3-name, h4, #h5-type, h6, .segment-badge-gbb, .space-heading, .guest-access, .local-area, .getting-around, .notes, .amenities-title, .sleeping-header, .h5-availability-header, .house-rules-heading, .cancellation-heading {
             color: #F93F32;
         }
 
-        p, .sleeping-title {
+        p, .sleeping-title, .ul-cancellation {
             color: #FA5E50;
         }
 
@@ -233,7 +233,7 @@
             background-size: 20px 20px; /* Adjust the size of the icon */
         }
 
-        .read-more, .show-more-btn, .read-more-house-rules {
+        .read-more, .show-more-btn, .read-more-house-rules, .accordion-header {
             background: none;
             border: none;
             color: #F93F32;
@@ -250,7 +250,10 @@
         .show-more-btn:active,
         .read-more-house-rules:hover,
         .read-more-house-rules:focus,
-        .read-more-house-rules:active {
+        .read-more-house-rules:active,
+        .accordion-header:hover,
+        .accordion-header:focus,
+        .accordion-header:active {
             color: #F93F32; /* Maintain the same color */
             text-decoration: none; /* Prevent underline */
             background: none; /* No background change */
