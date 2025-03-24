@@ -150,7 +150,7 @@ jQuery(document).ready(function ($) {
                                 "fee of $200.",
                                 "unintentional items left behind."
                             ]],
-                            // just added +1
+                            // 2
                             ["67a42c36ca3b7", [
                                 "casual work sessions.",
                                 "added convenience.",
@@ -161,7 +161,7 @@ jQuery(document).ready(function ($) {
                                 "Gold Coast’s key attractions.",
                                 "hygienic sleep experience."
                             ]],
-                            // 2
+                            // 3
                             ["679ac4ff06e28", [
                                 "coastal escape.",
                                 "(guests to use own credentials)",
@@ -170,7 +170,7 @@ jQuery(document).ready(function ($) {
                                 "Caloundra, and Noosa.",
                                 "hygienic sleep experience."
                             ]],
-                            // 3
+                            // 4
                             ["6799bd52ef9e9", [
                                 "business travellers.",
                                 "(guests to use their own credentials)",
@@ -179,7 +179,7 @@ jQuery(document).ready(function ($) {
                                 "and Brisbane Airport.",
                                 "hygienic sleep experience."
                             ]],
-                            // 4
+                            // 5
                             ["679874e2e2715", [
                                 "and accessibility.",
                                 "(guests to use their own credentials)",
@@ -188,7 +188,7 @@ jQuery(document).ready(function ($) {
                                 "shopping centres and parks.",
                                 "hygienic sleep experience."
                             ]],
-                            // 5
+                            // 6
                             ["6785eda8415d2", [
                                 "at the countertop.",
                                 "elegance and practicality.",
@@ -198,7 +198,7 @@ jQuery(document).ready(function ($) {
                                 "and Sunshine Plaza.",
                                 "hygienic sleep experience."
                             ]],
-                            // 6
+                            // 7
                             ["6785e404b27d6", [
                                 "internet throughout.",
                                 "(guests to use own credentials)",
@@ -207,7 +207,7 @@ jQuery(document).ready(function ($) {
                                 "surrounding areas.",
                                 "hygienic sleep experience."
                             ]],
-                            // 7
+                            // 8
                             ["674d2d98c7be2", [
                                 "close to VIC Park.",
                                 "conditioning available.",
@@ -216,7 +216,7 @@ jQuery(document).ready(function ($) {
                                 "and surrounding areas.",
                                 "hygienic sleep experience."
                             ]],
-                            // 8
+                            // 9 removed from the lists
                             ["674d0218b6b03", [
                                 "Paradise just steps away.",
                                 "(guests to use their own credentials)",
@@ -225,7 +225,7 @@ jQuery(document).ready(function ($) {
                                 "Gold Coast attractions.",
                                 "or rangehood"
                             ]],
-                            // 9
+                            // 10
                             ["67452363f1242", [
                                 "comprehensive laundry facilities.",
                                 "lounge area with TV",
@@ -234,7 +234,7 @@ jQuery(document).ready(function ($) {
                                 "and suburban areas.",
                                 "hygienic sleep experience."
                             ]],
-                            // 10
+                            // 11
                             ["6743ffdd5dc66", [
                                 "secure underground parking.",
                                 "(guests to use their own credentials)",
@@ -243,7 +243,7 @@ jQuery(document).ready(function ($) {
                                 "Gold Coast attractions.",
                                 "hygienic sleep experience."
                             ]],
-                            // 11
+                            // 12
                             ["673d2915dd5c8", [
                                 "moments surrounded by nature.",
                                 "(guests to use their own credentials)",
@@ -253,7 +253,7 @@ jQuery(document).ready(function ($) {
                                 "Gold Coast city centre.",
                                 "not the ocean."
                             ]],
-                            // 12
+                            // 13
                             ["673ac6d99f76c", [
                                 "apartment? Book today.",
                                 "(guests to use their own credentials)",
@@ -262,7 +262,7 @@ jQuery(document).ready(function ($) {
                                 "for more information.",
                                 "hygienic sleep experience."
                             ]],
-                            // 13
+                            // 14
                             ["672ae817d30e8", [
                                 "airflow throughout.",
                                 "Gold Coast’s highlights.",
@@ -272,7 +272,7 @@ jQuery(document).ready(function ($) {
                                 "website for more information.",
                                 "There is no dryer"
                             ]],
-                            // 14
+                            // 15
                             ["672ae5f6a82fc", [
                                 "and comfortable holiday.",
                                 "free-to-air channels",
@@ -281,7 +281,7 @@ jQuery(document).ready(function ($) {
                                 "more information.",
                                 "hygienic sleep experience."
                             ]],
-                            // 15
+                            // 16
                             ["67198cff520b4", [
                                 "comfort, style, and convenience.",
                                 "(guests to use their own credentials)",
@@ -290,7 +290,7 @@ jQuery(document).ready(function ($) {
                                 "for more information.",
                                 "no hair dryer"
                             ]],
-                            // 16
+                            // 17
                             ["6710609c3fe6f", [
                                 "memorable bayside escape.",
                                 "(guests need to use their own credentials)",
@@ -299,7 +299,7 @@ jQuery(document).ready(function ($) {
                                 "more information.",
                                 "decorative only"
                             ]],
-                            // 17
+                            // 18
                             ["66d8f80816e01", [
                                 "Gold Coast from this lovely home.",
                                 "(guests to use their own credentials)",
@@ -308,7 +308,7 @@ jQuery(document).ready(function ($) {
                                 "more information.",
                                 "hygienic sleep experience."
                             ]],
-                            // 18
+                            // 19
                             ["66c6b39cbecea", [
                                 "perfect Gold Coast escape.",
                                 "(guests to use their own credentials)",
@@ -317,7 +317,7 @@ jQuery(document).ready(function ($) {
                                 "more information.",
                                 "hygienic sleep experience."
                             ]],
-                            // 19
+                            // 20
                             ["6646de20e30b8", [
                                 "This is the place for you.",
                                 "and streaming apps available",
@@ -325,6 +325,53 @@ jQuery(document).ready(function ($) {
                                 "hairdryer provided",
                                 "more information.",
                                 "hygienic sleep experience."
+                            ]],
+                            // 21
+                            ["67b570571b049", [
+                                "cafes, shops, and coastal charm.",
+                                "with an electric stovetop and oven.",
+                                "amenities provided.",
+                                "parking in the driveway.",
+                                "and the best of the Sunshine Coast.",
+                                "free-to-air and streaming services (guests to use their own credentials)",
+                                "area seats 6",
+                                "towels, and hairdryer provided",
+                                "Wi-Fi available",
+                                "provides routes to Brisbane.",
+                                "additional fees apply.",
+                                "fresh and hygienic sleep experience.",
+                                "do not wear any shoes inside the property",
+                                "Council Rangers or Police.",
+                                "additional cleaning fee of $200.",
+                                "unintentional items left behind."
+                            ]],
+                            // 22
+                            ["67bbb8380fb35", [
+                                "offers a perfect coastal retreat.",
+                                "TV with streaming services (guests to use their own credentials)",
+                                "Countertop seats 2",
+                                "essentials, towels, and hairdryer provided",
+                                "allowed (additional cleaning fees apply)",
+                                "Surfers Paradise, Southport, and Robina.",
+                                "and hygienic sleep experience.",
+                                "do not wear any shoes inside the property",
+                                "Council Rangers or Police.",
+                                "cleaning fee of $200.",
+                                "unintentional items left behind."
+                            ]],
+                            // 23
+                            ["67b822cfaef52", [
+                                "and hassle-free stay.",
+                                "(guests to use their own credentials)",
+                                "area seats 12 and the countertop seats 2",
+                                "essentials, towels, and hairdryer provided",
+                                "friendly (additional costs apply)",
+                                "services to Brisbane and the Gold Coast.",
+                                "and hygienic sleep experience.",
+                                "any shoes inside the property",
+                                "Council Rangers or Police.",
+                                "cleaning fee of $200.",
+                                "unintentional items left behind."
                             ]],
                         ]);
                 
@@ -350,7 +397,7 @@ jQuery(document).ready(function ($) {
                         }
                 
                         // Exclude certain compound words from hyphen logic
-                        const exceptions = ["free-to-air", "in-unit", "well-rounded", "Wi-Fi", "well-appointed", "1-bedroom", "open-plan", "2-seater", "4-bedroom", "2.5-bathroom", "en-suite", "Free-to-Air", "2-bedroom", "2-bathroom", "4-seater", "hassle-free", "home-cooked", "queen-sized", "wind-down", "On-street", "single-level", "flat-screen", "six-seater", "high-speed", "on-site", "six-seat", "set-up", "3-bathroom", "5-seater", "streaming-enabled", "air-conditioning", "Walk-in", "3-bed", "2-bath", "walk-in", "year-round", "2-bed", "1-bath", "well-located", "budget-friendly", "medium-sized", "4-bed", "3-bath", "cottage-style", "king-sized", "1-bed", "well-equipped", "5-bed", "Brand-new", "private-balcony", "5-min", "spa-like", "wall-mounted"];
+                        const exceptions = ["free-to-air", "in-unit", "well-rounded", "Wi-Fi", "well-appointed", "1-bedroom", "open-plan", "2-seater", "4-bedroom", "2.5-bathroom", "en-suite", "Free-to-Air", "2-bedroom", "2-bathroom", "4-seater", "hassle-free", "home-cooked", "queen-sized", "wind-down", "On-street", "single-level", "flat-screen", "six-seater", "high-speed", "on-site", "six-seat", "set-up", "3-bathroom", "5-seater", "streaming-enabled", "air-conditioning", "Walk-in", "3-bed", "2-bath", "walk-in", "year-round", "2-bed", "1-bath", "well-located", "budget-friendly", "medium-sized", "4-bed", "3-bath", "cottage-style", "king-sized", "1-bed", "well-equipped", "5-bed", "Brand-new", "private-balcony", "5-min", "spa-like", "wall-mounted", "well-maintained"];
                 
                         //formattedSpace
                         formattedSpace = formattedSpace.replace(/\b([^\s]+)-([^\s]+)\b/g, (match, part1, part2) => {
