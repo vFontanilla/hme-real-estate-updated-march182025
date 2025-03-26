@@ -64,8 +64,8 @@ jQuery(document).ready(function ($) {
             })
             .then(data => {
 
-                var nightlyRate = data.minimumNightlyRate;
-                window.nightlyRate = nightlyRate;
+                var guests = data.guests;
+                window.guests = guests;
 
                 if (data && data.photos && data.photos.length > 0) {
                     const photos = data.photos;

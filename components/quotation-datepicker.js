@@ -58,7 +58,7 @@ document.getElementById("div-quotation").innerHTML = `
     <br>
     <div>
         <div class="div-enquire-btn">
-            <button class="eqnuire-btn">Enquire Now</button>
+            <button class="enquire-btn" id="enquire-btn" disabled>Enquire Now</button>
         </div>
     </div>
 `;
@@ -142,6 +142,7 @@ async function fetchQuote(checkIn, checkOut, adults, children) {
 function updateQuoteDisplay(data) {
     const quoteDetails = document.getElementById("quoteDetails");
     const quoteHeader = document.getElementById("div-h5-available-header");
+    const enquireBtn = document.getElementById("enquire-btn");
 
     if (data && data.quote) {
         // Convert cents to dollars and ensure 2 decimal places
@@ -170,6 +171,7 @@ function updateQuoteDisplay(data) {
 
         quoteDetails.style.display = 'block';
         quoteHeader.style.display = 'block';
+        enquireBtn.disabled = false;
     } else {
         console.log("🔹 No quote data available, resetting heading.");
 
@@ -193,6 +195,7 @@ function updateQuoteDisplay(data) {
         `;
 
         quoteDetails.style.display = 'none';
+        enquireBtn.disabled = true;
     }
 }
 
@@ -203,14 +206,32 @@ function getPropertyIdFromURL() {
 function initializeFlatpickrQuotation(availableDates) {
     const checkInInput = document.getElementById("checkInPicker");
     const checkOutInput = document.getElementById("checkOutPicker");
+    const guestPicker = document.getElementById("idGuestPicker");
+    const guestDropdown = document.getElementById("guestDropdown");
+    const adultCount = document.getElementById("adultCount");
+    const childrenCount = document.getElementById("childrenCount");
+    const applyGuests = document.getElementById("applyGuests");
+    
+
+    if (window.guests !== undefined) {
+        console.log("Guests data:", window.guests);
+    } else {
+        console.log("Guests data is not yet available.");
+    }
 
     if (!checkInInput || !checkOutInput) {
         console.error("❌ Check-in or Check-out input fields not found.");
         return;
     }
 
+    let maxGuests = window.guests || 6;
     let adults = 2;
     let children = 0;
+
+    function updateGuestPickerDisplay() {
+        const totalGuests = adults + children;
+        guestPicker.value = `${totalGuests} Guest${totalGuests !== 1 ? 's' : ''}`;
+    }
 
     const checkIn = flatpickr(checkInInput, {
         dateFormat: "Y-m-d",
@@ -259,12 +280,6 @@ function initializeFlatpickrQuotation(availableDates) {
         }
     });
 
-    const guestPicker = document.getElementById("idGuestPicker");
-    const guestDropdown = document.getElementById("guestDropdown");
-    const adultCount = document.getElementById("adultCount");
-    const childrenCount = document.getElementById("childrenCount");
-    const applyGuests = document.getElementById("applyGuests");
-
     guestPicker.addEventListener("click", (e) => {
         e.stopPropagation();
         guestDropdown.style.display = "block";
@@ -284,16 +299,19 @@ function initializeFlatpickrQuotation(availableDates) {
         button.addEventListener("click", (e) => {
             e.stopPropagation();
             const type = e.target.dataset.type;
-            if (type === "adults") {
-                adults++;
-                adultCount.textContent = adults;
+            const totalGuests = adults + children;
+
+            if (totalGuests < maxGuests) {
+                if (type === "adults") {
+                    adults++;
+                    adultCount.textContent = adults;
+                } else if (type === "children") {
+                    children++;
+                    childrenCount.textContent = children;
+                }
+                updateGuestPickerDisplay();
             } else {
-                children++;
-                childrenCount.textContent = children;
-            }
-            updateGuestPickerDisplay();
-            if (checkIn.selectedDates.length > 0 && checkOut.selectedDates.length > 0) {
-                fetchQuote(checkIn.selectedDates[0].toLocaleDateString("en-CA"), checkOut.selectedDates[0].toLocaleDateString("en-CA"), adults, children);
+                console.warn(`🚫 Cannot add more guests. Max allowed: ${maxGuests}`);
             }
         });
     });
@@ -302,6 +320,7 @@ function initializeFlatpickrQuotation(availableDates) {
         button.addEventListener("click", (e) => {
             e.stopPropagation();
             const type = e.target.dataset.type;
+
             if (type === "adults" && adults > 1) {
                 adults--;
                 adultCount.textContent = adults;
@@ -310,9 +329,6 @@ function initializeFlatpickrQuotation(availableDates) {
                 childrenCount.textContent = children;
             }
             updateGuestPickerDisplay();
-            if (checkIn.selectedDates.length > 0 && checkOut.selectedDates.length > 0) {
-                fetchQuote(checkIn.selectedDates[0].toLocaleDateString("en-CA"), checkOut.selectedDates[0].toLocaleDateString("en-CA"), adults, children);
-            }
         });
     });
 
@@ -320,15 +336,7 @@ function initializeFlatpickrQuotation(availableDates) {
         e.stopPropagation();
         guestDropdown.style.display = "none";
         updateGuestPickerDisplay();
-        if (checkIn.selectedDates.length > 0 && checkOut.selectedDates.length > 0) {
-            fetchQuote(checkIn.selectedDates[0].toLocaleDateString("en-CA"), checkOut.selectedDates[0].toLocaleDateString("en-CA"), adults, children);
-        }
     });
-
-    function updateGuestPickerDisplay() {
-        const totalGuests = adults + children;
-        guestPicker.value = `${totalGuests} Guest${totalGuests !== 1 ? 's' : ''}`;
-    }
 
     updateGuestPickerDisplay();
 }
@@ -360,7 +368,7 @@ quotationStyle.textContent = `
     #div-quotation {
         overflow: visible;
         border-radius: 4px;
-        border: 1px solid rgb(239, 239, 240);
+        border: 2px solid rgb(239, 239, 240);
         min-height: 300px;
         padding: 24px 16px;
         position: relative;
@@ -433,6 +441,27 @@ quotationStyle.textContent = `
     }
     #quoteDetails {
         display: none;
+    }
+    .div-enquire-btn {
+        display: flex;
+        justify-content: center;
+    }
+    .enquire-btn {
+        border-radius: 10px;
+        background: #e04e40;
+        color: white;
+        border: none;
+    }
+    .enquire-btn:hover{
+        background: #e04e40;
+        color: white;
+        border: none;  
+    }
+    .enquire-btn:disabled {
+        background: #d3d3d3;
+        color: #888;
+        cursor: not-allowed;
+        opacity: 0.6;
     }
 `;
 document.head.appendChild(quotationStyle);

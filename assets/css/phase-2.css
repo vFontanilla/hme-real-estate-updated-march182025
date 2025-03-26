@@ -327,13 +327,4 @@
         #div-availability {
             overflow: visible;
         }
-
-        .div-enquire-btn {
-            display: flex;
-            justify-content: center;
-        }
-
-        .eqnuire-btn {
-            border-radius: 10px;
-        }
     /* </style> */
