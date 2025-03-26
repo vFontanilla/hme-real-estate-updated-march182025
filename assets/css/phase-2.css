@@ -11,7 +11,7 @@
         }
 
         p, .sleeping-title, .ul-cancellation {
-            color: #FA5E50;
+            color:rgb(0, 0, 0);
         }
 
         .parent {
@@ -301,7 +301,7 @@
 
         .amenity-item {
             /* background: #F93F32; */
-            color: #F93F32;
+            color:rgb(0, 0, 0);
             padding: 8px 12px;
             border-radius: 5px;
             text-align: center;
@@ -327,61 +327,13 @@
         #div-availability {
             overflow: visible;
         }
-        
-        .flatpickr-calendar {
-            width: 100% !important;
-            height: auto !important;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transform: scale(1.0);
-            transform-origin: top left;
-        }
-        
-        .flatpickr-innerContainer {
+
+        .div-enquire-btn {
             display: flex;
-            align-items: center;
-            width: 100% !important;
-            overflow: hidden;
-            justify-content: space-around;
-        }
-        
-        .flatpickr-days {
-            min-width: 100%;
-        }
-        
-        .flatpickr-day {
-            font-size: 12px !important;
-            padding: 2px !important;
-            margin: 0 !important;
-            text-align: center;
-            color: #FA5E50;
-            pointer-events: none;
-            user-select: none;
-        }
-        
-        .flatpickr-month {
-            width: 50% !important;
-        }
-        
-        /* Corrected selectors */
-        .flatpickr-months .flatpickr-month {
-            font-size: 14px !important;
-            text-align: center;
-            padding-bottom: 5px;
-            color: #FA5E50 /* Color the month names */
-        }
-        
-        .flatpickr-weekdays .flatpickr-weekday {
-            color: #FA5E50 /* Color the weekdays */
-        }
-        
-        .flatpickr-current-month .flatpickr-prev-month,
-        .flatpickr-current-month .flatpickr-next-month {
-            color: #FA5E50, /* Color the navigation arrows */
+            justify-content: center;
         }
 
-        .available-highlight {
-            color: #FA5E50;
-            opacity: 0.8;
+        .eqnuire-btn {
+            border-radius: 10px;
         }
     /* </style> */

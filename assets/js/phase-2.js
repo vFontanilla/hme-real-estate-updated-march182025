@@ -63,6 +63,10 @@ jQuery(document).ready(function ($) {
                 return response.json();
             })
             .then(data => {
+
+                var nightlyRate = data.minimumNightlyRate;
+                window.nightlyRate = nightlyRate;
+
                 if (data && data.photos && data.photos.length > 0) {
                     const photos = data.photos;
 

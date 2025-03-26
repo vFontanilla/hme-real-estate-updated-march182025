@@ -37,7 +37,11 @@ async function fetchAvailability() {
         const availableDates = data.months.flatMap(month =>
             month.days
                 .filter(day => day.availableForCheckIn === true || day.availableForCheckOut === true)
-                .map(day => formatDate(new Date(day.date)))
+                .map(day => {
+                    let adjustedDate = new Date(day.date);
+                    adjustedDate.setDate(adjustedDate.getDate() - 1); // Shift back by 1 day
+                    return formatDate(adjustedDate);
+                })
         );
 
         if (availableDates.length === 0) {
@@ -45,8 +49,9 @@ async function fetchAvailability() {
             return;
         }
 
-        console.log("✅ Final Available Dates:", availableDates);
+        console.log("✅ Available Dates for Check-In/Check-Out:", availableDates);
 
+        console.log("✅ Final Available Dates:", availableDates);
         initializeFlatpickr(availableDates);
     } catch (error) {
         console.error("Error fetching availability:", error);
@@ -59,22 +64,19 @@ function getPropertyIdFromURL() {
 
 function initializeFlatpickr(availableDates) {
     flatpickr("#multiMonthPicker", {
+        dateFormat: "Y-m-d",
         showMonths: 2,
+        minDate: "today",
+        enable: availableDates,
         inline: true,
-        disableMobile: true,
-        clickOpens: false,
-        disable: [(date) => {
-            // Create a new date that's one day earlier
-            const previousDay = new Date(date);
-            previousDay.setDate(date.getDate() + 1);
-            // Check if the previous day is in availableDates
-            return !availableDates.includes(formatDate(previousDay));
-        }],
         onDayCreate: function (dObj, dStr, fp, dayElem) {
             const date = formatDate(dayElem.dateObj);
+            
             if (availableDates.includes(date)) {
                 console.log(`✅ Highlighting ${date}`);
                 dayElem.classList.add("available-highlight");
+            } else {
+                dayElem.classList.add("unavailable-highlight");
             }
         },
         onReady: function () {
@@ -82,5 +84,74 @@ function initializeFlatpickr(availableDates) {
         },
     });
 }
+
+// CSS Styling
+const availabilityStyle = document.createElement("style");
+availabilityStyle.textContent = `
+    #div-availability .flatpickr-calendar {
+        width: 100% !important;
+        height: auto !important;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: scale(1.0);
+        transform-origin: top left;
+    }
+
+    #div-availability .flatpickr-innerContainer {
+        display: flex;
+        align-items: center;
+        width: 100% !important;
+        overflow: hidden;
+        justify-content: space-around;
+    }
+
+    #div-availability .flatpickr-days {
+        min-width: 100%;
+    }
+
+    #div-availability .flatpickr-day {
+        font-size: 12px !important;
+        padding: 2px !important;
+        margin: 0 !important;
+        text-align: center;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    /* Available Dates - Black */
+    #div-availability .flatpickr-day.available-highlight {
+        color: #000000 !important;
+        font-weight: bold;
+        opacity: 1;
+    }
+
+    /* Unavailable Dates - Red */
+    #div-availability .flatpickr-day.unavailable-highlight {
+        color: #FA5E50 !important;
+        opacity: 0.6;
+    }
+
+    #div-availability .flatpickr-month {
+        width: 50% !important;
+    }
+
+    #div-availability .flatpickr-months .flatpickr-month {
+        font-size: 14px !important;
+        text-align: center;
+        padding-bottom: 5px;
+        color: #FA5E50;
+    }
+
+    #div-availability .flatpickr-weekdays .flatpickr-weekday {
+        color: #FA5E50;
+    }
+
+    #div-availability .flatpickr-current-month .flatpickr-prev-month,
+    #div-availability .flatpickr-current-month .flatpickr-next-month {
+        color: #FA5E50;
+    }
+`;
+
+document.head.appendChild(availabilityStyle);
 
 fetchAvailability();
