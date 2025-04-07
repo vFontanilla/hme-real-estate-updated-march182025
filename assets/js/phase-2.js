@@ -377,6 +377,33 @@ jQuery(document).ready(function ($) {
                                 "cleaning fee of $200.",
                                 "unintentional items left behind."
                             ]],
+                            //24
+                            ["67d1084aac477",[
+                                "families and travellers alike.",
+                                "(guests to use their own credentials)",
+                                "area seats 3",
+                                "towels and hairdryer provided",
+                                "outdoor seating area",
+                                "and Gold Coast Airport.",
+                                "the property from the street entrance.",
+                                "ensuring a fresh and hygienic sleep experience.",
+                                "your surrounding neighbours.",
+                                "Council Rangers or Police.",
+                            ]],
+                            //25
+                            ["67c7cc4ccc7c5",[
+                                "dining table and additional countertop seating.",
+                                "private laundry with a washer and dryer for convenience.",
+                                "this home is as practical as it is stylish.",
+                                "(guests to use their own credentials)",
+                                "area seats 14 and countertop seats 4",
+                                "towels, and hairdryer provided",
+                                "direct routes to Brisbane CBD, South Bank, and Fortitude Valley.",
+                                "Any violations will result in immediate eviction",
+                                "ensuring a fresh and hygienic sleep experience.",
+                                "ask you to respect the community and your surrounding neighbours.",
+                                "the Building Manager, Council Rangers or Police.",
+                            ]],
                         ]);
                 
                         let formattedSpace = propertySpace;
