@@ -2,6 +2,9 @@ document.getElementById("div-quotation").innerHTML = `
     <div class="div-h5-available-header" id="div-h5-available-header">
         <h5 class="h5-availability-header">Enquiry</h5>
     </div>
+    <div class="div-h5-available-warning" id="div-h5-available-warning">
+        <h5 class="h5-availability-header">Minimum stay of 3 nights per property.</h5>
+    </div>
     <div>
         <div>Dates</div>
         <div class="div-dates-container">
@@ -142,6 +145,7 @@ async function fetchQuote(checkIn, checkOut, adults, children) {
 function updateQuoteDisplay(data) {
     const quoteDetails = document.getElementById("quoteDetails");
     const quoteHeader = document.getElementById("div-h5-available-header");
+    const quoteWarning = document.getElementById("div-h5-available-warning");
     const enquireBtn = document.getElementById("enquire-btn");
 
     if (data && data.quote) {
@@ -149,6 +153,7 @@ function updateQuoteDisplay(data) {
         const total = (data.quote.total / 100).toFixed(2) || '1,000.00';
 
         console.log(`🔹 Updating heading with: $${total} Total`);
+        console.log("Di kitaon", quoteWarning);
 
         quoteDetails.innerHTML = `
             <div class="div-details-quote">
@@ -174,6 +179,7 @@ function updateQuoteDisplay(data) {
         enquireBtn.disabled = false;
     } else {
         console.log("🔹 No quote data available, resetting heading.");
+        console.log("kitaon", quoteWarning);
 
         quoteDetails.innerHTML = `
             <div class="div-details-quote">
@@ -211,12 +217,14 @@ function initializeFlatpickrQuotation(availableDates) {
     const adultCount = document.getElementById("adultCount");
     const childrenCount = document.getElementById("childrenCount");
     const applyGuests = document.getElementById("applyGuests");
-    
+    const quoteWarning = document.getElementById("div-h5-available-warning");
 
-    if (window.guests !== undefined) {
-        console.log("Guests data:", window.guests);
+    // Debugging: Verify the warning element exists
+    console.log("quoteWarning element:", quoteWarning);
+    if (!quoteWarning) {
+        console.error("❌ div-h5-available-warning element not found in DOM");
     } else {
-        console.log("Guests data is not yet available.");
+        console.log("quoteWarning initial display:", quoteWarning.style.display);
     }
 
     if (!checkInInput || !checkOutInput) {
@@ -233,6 +241,36 @@ function initializeFlatpickrQuotation(availableDates) {
         guestPicker.value = `${totalGuests} Guest${totalGuests !== 1 ? 's' : ''}`;
     }
 
+    // Function to check stay duration and update UI
+    function checkStayDuration(checkInInstance, checkOutInstance) {
+        if (checkInInstance.selectedDates.length > 0 && checkOutInstance.selectedDates.length > 0) {
+            const checkInDate = new Date(checkInInstance.selectedDates[0]);
+            const checkOutDate = new Date(checkOutInstance.selectedDates[0]);
+            const diffTime = checkOutDate - checkInDate;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            console.log("Stay duration (days):", diffDays); // Debugging
+
+            if (diffDays < 3) {
+                console.log("Showing minimum stay warning"); // Debugging
+                quoteWarning.style.display = "block"; // Show the warning
+                updateQuoteDisplay(null); // Reset quote display
+            } else {
+                console.log("Hiding warning, fetching quote"); // Debugging
+                quoteWarning.style.display = "none"; // Hide the warning
+                fetchQuote(
+                    checkInInstance.selectedDates[0].toLocaleDateString("en-CA"),
+                    checkOutInstance.selectedDates[0].toLocaleDateString("en-CA"),
+                    adults,
+                    children
+                ); // Proceed with quote fetch
+            }
+        } else {
+            console.log("One or both dates not selected, resetting"); // Debugging
+            quoteWarning.style.display = "none"; // Hide warning when dates are incomplete
+            updateQuoteDisplay(null); // Reset quote display
+        }
+    }
+
     const checkIn = flatpickr(checkInInput, {
         dateFormat: "Y-m-d",
         minDate: "today",
@@ -244,17 +282,11 @@ function initializeFlatpickrQuotation(availableDates) {
             instance.currentYearElement.setAttribute("title", "Select Year");
         },
         onChange: function(selectedDates, dateStr, instance) {
+            console.log("Check-in changed to:", dateStr); // Debugging
             if (selectedDates.length > 0) {
                 checkOut.set("minDate", dateStr);
-                if (checkOut.selectedDates.length > 0) {
-                    console.log("Fetching quote with checkIn from checkIn:", dateStr);
-                    fetchQuote(dateStr, checkOut.selectedDates[0].toLocaleDateString("en-CA"), adults, children);
-                }
-            } else {
-                // Reset display when check-in is cleared
-                console.log("Check-in cleared, resetting quote display");
-                updateQuoteDisplay(null);
             }
+            checkStayDuration(instance, checkOut); // Check stay after change
         }
     });
 
@@ -269,17 +301,12 @@ function initializeFlatpickrQuotation(availableDates) {
             instance.currentYearElement.setAttribute("title", "Select Year");
         },
         onChange: function(selectedDates, dateStr, instance) {
-            if (selectedDates.length > 0 && checkIn.selectedDates.length > 0) {
-                console.log("Fetching quote with checkIn from checkOut:", checkIn.selectedDates[0].toLocaleDateString("en-CA"));
-                fetchQuote(checkIn.selectedDates[0].toLocaleDateString("en-CA"), dateStr, adults, children);
-            } else {
-                // Reset display when check-out is cleared
-                console.log("Check-out cleared, resetting quote display");
-                updateQuoteDisplay(null);
-            }
+            console.log("Check-out changed to:", dateStr); // Debugging
+            checkStayDuration(checkIn, instance); // Check stay after change
         }
     });
 
+    // Guest picker logic remains unchanged
     guestPicker.addEventListener("click", (e) => {
         e.stopPropagation();
         guestDropdown.style.display = "block";
@@ -339,10 +366,18 @@ function initializeFlatpickrQuotation(availableDates) {
     });
 
     updateGuestPickerDisplay();
+
+    // Initially hide the warning
+    quoteWarning.style.display = "none";
 }
 
 const quotationStyle = document.createElement("style");
 quotationStyle.textContent = `
+    #div-h5-available-warning {
+        display: none;
+        color: red;
+        margin-top: 10px;
+    }
     #div-quotation .flatpickr-calendar {
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
