@@ -404,6 +404,23 @@ jQuery(document).ready(function ($) {
                                 "ask you to respect the community and your surrounding neighbours.",
                                 "the Building Manager, Council Rangers or Police.",
                             ]],
+                            //26
+                            ["67e3a5e9c3887",[
+                                "and split system A/C for restful nights.",
+                                "This Hamilton home offers everything for a stylish yet functional stay.",
+                                "Free-to-Air and streaming access (guests to use their own credentials)",
+                                "Dining area seats 6",
+                                "Travel essentials, towels and hairdryer provided",
+                                "The fireplace is for decoration purposes only",
+                                "Nearby Doomben Station offers regular train services.",
+                                "Other things",
+                                "Stairs inside and outside the property",
+                                "ensuring a fresh and hygienic sleep experience.",
+                                "do not wear any shoes inside the property",
+                                "the Building Manager, Council Rangers or Police.",
+                                "Any stays with pets will incur an additional cleaning fee of $200.",
+                                "before departing to avoid any unintentional items left behind.",
+                            ]],
                         ]);
                 
                         let formattedSpace = propertySpace;

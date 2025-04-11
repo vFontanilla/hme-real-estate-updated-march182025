@@ -129,26 +129,75 @@ async function fetchQuote(checkIn, checkOut, adults, children) {
             return;
         }
 
-        const apiUrl = `https://api.madecomfy.com.au/api/v4/properties/${propertyId}/quote?checkIn=${checkIn}&checkOut=${checkOut}&adults=${adults}&children=${children}`;
-        console.log(`📡 Fetching quote data: ${apiUrl}`);
+        // Define quote API URL (GET)
+        const quoteApiUrl = `https://api.madecomfy.com.au/api/v4/properties/${propertyId}/quote?checkIn=${checkIn}&checkOut=${checkOut}&adults=${adults}&children=${children}`;
+        console.log(`📡 Fetching quote data: ${quoteApiUrl}`);
 
-        const response = await fetch(apiUrl);
-        const data = await response.json();
+        // Define bookings API URL with query parameters (POST)
+        const bookingsApiUrl = `https://api.madecomfy.com.au/api/v4/properties/${propertyId}/bookings?checkIn=${checkIn}&checkOut=${checkOut}&adults=${adults}&children=${children}`;
+        console.log(`📡 Posting bookings data: ${bookingsApiUrl}`);
 
-        updateQuoteDisplay(data);
+        // Fetch both APIs concurrently using Promise.all
+        const [quoteResponse, bookingsResponse] = await Promise.all([
+            fetch(quoteApiUrl)
+                .then(res => {
+                    if (!res.ok) throw new Error(`Quote API error: ${res.status} ${res.statusText}`);
+                    return res.json();
+                })
+                .catch(err => {
+                    console.error("Quote API failed:", err);
+                    return null; // Return null to indicate failure
+                }),
+            fetch(bookingsApiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // No body needed since parameters are in the URL
+                // If the API requires a body, we can add it here
+                body: JSON.stringify({})
+            })
+                .then(async res => {
+                    if (!res.ok) {
+                        const errorText = await res.text();
+                        throw new Error(`Bookings API error: ${res.status} ${res.statusText} - ${errorText}`);
+                    }
+                    return res.json();
+                })
+                .catch(err => {
+                    console.error("Bookings API failed:", err.message);
+                    return null; // Return null to indicate failure
+                })
+        ]);
+
+        // Extract longId and create booking URL
+        let bookingUrl = null;
+        if (bookingsResponse && bookingsResponse.booking && bookingsResponse.booking.longId) {
+            const longId = bookingsResponse.booking.longId;
+            bookingUrl = `https://book.madecomfy.com/bookings/?bookingId=${longId}`;
+            console.log(`🔹 Extracted longId: ${longId}`);
+            console.log(`🔗 Generated booking URL: ${bookingUrl}`);
+        } else {
+            console.log("🔹 No booking or longId found in bookings response:", bookingsResponse);
+        }
+
+        // Update quote display and enquire button with quote data and booking URL
+        updateQuoteDisplay(quoteResponse, bookingUrl);
 
     } catch (error) {
-        console.error("Error fetching quote:", error);
+        console.error("Error fetching data:", error);
+        // Ensure button is disabled and UI is reset on error
+        updateQuoteDisplay(null, null);
     }
 }
 
-function updateQuoteDisplay(data) {
+function updateQuoteDisplay(data, bookingUrl) {
     const quoteDetails = document.getElementById("quoteDetails");
     const quoteHeader = document.getElementById("div-h5-available-header");
     const quoteWarning = document.getElementById("div-h5-available-warning");
     const enquireBtn = document.getElementById("enquire-btn");
 
-    if (data && data.quote) {
+    if (data && data.quote && bookingUrl) {
         // Convert cents to dollars and ensure 2 decimal places
         const total = (data.quote.total / 100).toFixed(2) || '1,000.00';
 
@@ -171,14 +220,24 @@ function updateQuoteDisplay(data) {
         `;
 
         quoteHeader.innerHTML = `
-            <h5 class="h5-availability-header">$${total} total</h5>
+            <h5 class="h5-availability-header">A$${total} total</h5>
+        `;
+
+        quoteWarning.innerHTML = `
+            <h5 class="h5-availability-header">Are you sure you want to proceed in Booking?</h5>
         `;
 
         quoteDetails.style.display = 'block';
         quoteHeader.style.display = 'block';
+
+        // Enable button, set text to "View Booking", and open bookingUrl in new tab
         enquireBtn.disabled = false;
+        enquireBtn.textContent = "View Booking";
+        enquireBtn.onclick = () => {
+            window.location.href = bookingUrl;
+        };
     } else {
-        console.log("🔹 No quote data available, resetting heading.");
+        console.log("🔹 No quote data or booking URL available, resetting UI.");
         console.log("kitaon", quoteWarning);
 
         quoteDetails.innerHTML = `
@@ -200,8 +259,14 @@ function updateQuoteDisplay(data) {
             <h5 class="h5-availability-header">Enquiry</h5>
         `;
 
+        quoteWarning.innerHTML = `
+            <h5 class="h5-availability-header">Minimum stay of 3 nights per property.</h5>
+        `;
+
         quoteDetails.style.display = 'none';
         enquireBtn.disabled = true;
+        enquireBtn.textContent = "Enquire Now";
+        enquireBtn.onclick = null; // Clear any previous onclick
     }
 }
 
@@ -238,7 +303,24 @@ function initializeFlatpickrQuotation(availableDates) {
 
     function updateGuestPickerDisplay() {
         const totalGuests = adults + children;
+        const guestPicker = document.getElementById("idGuestPicker");
         guestPicker.value = `${totalGuests} Guest${totalGuests !== 1 ? 's' : ''}`;
+    
+        // Get checkIn and checkOut from the date picker inputs
+        const checkInPicker = document.getElementById("checkInPicker");
+        const checkOutPicker = document.getElementById("checkOutPicker");
+        const checkIn = checkInPicker.value; // e.g., "2025-04-26"
+        const checkOut = checkOutPicker.value; // e.g., "2025-04-29"
+    
+        // Validate inputs before calling fetchQuote
+        if (!checkIn || !checkOut) {
+            console.error("❌ Check-in or check-out date is missing");
+            updateQuoteDisplay(null, null); // Reset UI if dates are missing
+            return;
+        }
+    
+        // Call fetchQuote with all required parameters
+        fetchQuote(checkIn, checkOut, adults, children);
     }
 
     // Function to check stay duration and update UI
