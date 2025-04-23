@@ -63,9 +63,13 @@ function getPropertyIdFromURL() {
 }
 
 function initializeFlatpickr(availableDates) {
+    // Determine number of months based on screen width
+    const isMobile = window.innerWidth <= 768;
+    const monthCount = isMobile ? 1 : 2;
+
     flatpickr("#multiMonthPicker", {
         dateFormat: "Y-m-d",
-        showMonths: 2,
+        showMonths: monthCount,
         minDate: "today",
         enable: availableDates,
         inline: true,
@@ -80,7 +84,9 @@ function initializeFlatpickr(availableDates) {
             }
         },
         onReady: function () {
-            document.getElementById("div-availability").style.width = "739.2px";
+            // Remove fixed width to allow responsiveness
+            document.getElementById("div-availability").style.width = "100%";
+            document.getElementById("div-availability").style.maxWidth = "739.2px"; // Maintain max-width for desktop
         },
     });
 }
@@ -88,13 +94,17 @@ function initializeFlatpickr(availableDates) {
 // CSS Styling
 const availabilityStyle = document.createElement("style");
 availabilityStyle.textContent = `
+    #div-availability {
+        width: 100%;
+        max-width: 739.2px;
+        margin: 0 auto;
+    }
+
     #div-availability .flatpickr-calendar {
         width: 100% !important;
         height: auto !important;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transform: scale(1.0);
-        transform-origin: top left;
     }
 
     #div-availability .flatpickr-innerContainer {
@@ -149,6 +159,55 @@ availabilityStyle.textContent = `
     #div-availability .flatpickr-current-month .flatpickr-prev-month,
     #div-availability .flatpickr-current-month .flatpickr-next-month {
         color: #FA5E50;
+    }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 768px) {
+        #div-availability {
+            padding: 0 12px;
+        }
+
+        #div-availability .flatpickr-calendar {
+            transform: none; /* Remove scaling for mobile */
+        }
+
+        #div-availability .flatpickr-innerContainer {
+            flex-direction: column; /* Stack months vertically */
+            justify-content: center;
+        }
+
+        #div-availability .flatpickr-month {
+            width: 100% !important; /* Full width for single month */
+            margin-bottom: 10px;
+        }
+
+        #div-availability .flatpickr-day {
+            font-size: 14px !important; /* Larger font for readability */
+            padding: 4px !important; /* More spacing */
+        }
+
+        #div-availability .flatpickr-months .flatpickr-month {
+            font-size: 16px !important; /* Larger month title */
+        }
+
+        #div-availability .flatpickr-weekdays .flatpickr-weekday {
+            font-size: 14px !important; /* Larger weekday labels */
+        }
+    }
+
+    @media (max-width: 576px) {
+        #div-availability {
+            padding: 0 8px;
+        }
+
+        #div-availability .flatpickr-day {
+            font-size: 13px !important; /* Slightly smaller for very small screens */
+            padding: 3px !important;
+        }
+
+        #div-availability .flatpickr-months .flatpickr-month {
+            font-size: 15px !important;
+        }
     }
 `;
 

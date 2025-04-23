@@ -244,8 +244,14 @@ function dequeue_other_google_maps() {
 add_action('wp_enqueue_scripts', 'dequeue_other_google_maps', 5);
 
 function enqueue_google_maps_api() {
+    $google_maps_api_key = get_option('google_maps_api_key');
 
-    $google_maps_url = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBVBzOZewkVFwwqRXL1JwrV7YzZeyEQ0-I&libraries=places,marker&callback=initMap";
+    if (!$google_maps_api_key) {
+        error_log("Google Maps API key is missing in Wordpress settings");
+        return;
+    }
+
+    $google_maps_url = "https://maps.googleapis.com/maps/api/js?key={$google_maps_api_key}&libraries=places,marker&callback=initMap";
 
     wp_enqueue_script('google-maps', $google_maps_url, array(), null, true);
 
