@@ -351,8 +351,8 @@ jQuery(document).ready(function ($) {
                             ]],
                             // 22
                             ["67bbb8380fb35", [
-                                "offers a perfect coastal retreat.",
-                                "TV with streaming services (guests to use their own credentials)",
+                                "this beautiful beachside retreat is ready to welcome you.",
+                                "Smart TV with streaming services (guests to use their own credentials)",
                                 "Countertop seats 2",
                                 "essentials, towels, and hairdryer provided",
                                 "allowed (additional cleaning fees apply)",
@@ -420,6 +420,37 @@ jQuery(document).ready(function ($) {
                                 "the Building Manager, Council Rangers or Police.",
                                 "Any stays with pets will incur an additional cleaning fee of $200.",
                                 "before departing to avoid any unintentional items left behind.",
+                            ]],
+                            //27
+                            ["67eb633ecdca7",[
+                                "this seaside escape offers both comfort and convenience.",
+                                "Dining area seats 4",
+                                "and hairdryer provided",
+                                "is Landsborough Station (approx. 20 min drive).",
+                                "and hygienic sleep experience.",
+                                "surrounding neighbours.",
+                                "Council Rangers or Police.",
+                            ]],
+                            //28
+                            ["67e0d0919a686",[
+                                "The apartment also offers access to a private outdoor space with seating, perfect for unwinding.",
+                                "TV with Free-to-Air and streaming (guests to use their own credentials)",
+                                "Dining area seats 4",
+                                "Travel essentials, towels, and hairdryer provided",
+                                "The South Brisbane railway station is a short 10-minute walk away.",
+                                "and hygienic sleep experience.",
+                                "we kindly ask you to respect the community and your surrounding neighbours.",
+                                "Council Rangers or Police.",
+                            ]],
+                            //29
+                            ["67dcd077aea9e",[
+                                "this unique apartment is perfect for travellers seeking an architectural gem in a lively neighbourhood.",
+                                "TV with Free-to-Air and streaming access (guests to use their own credentials)",
+                                "Dining area seats 4 and countertop seats 4",
+                                "Travel essentials, towels and hairdryer provided",
+                                "Teneriffe Ferry Terminal is a 5-min walk away.",
+                                "we kindly ask you to respect the community and your surrounding neighbours.",
+                                "the Building Manager, Council Rangers or Police.",
                             ]],
                         ]);
                 
