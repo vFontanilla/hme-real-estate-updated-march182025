@@ -3,18 +3,10 @@ jQuery(document).ready(function ($) {
     //initialization
     var apiUrl = 'https://api.madecomfy.com.au/api/v4/properties';
     var apiParams = {
-        'partnerId': "66d1080aa56e4",
+        // 'partnerId': "66d1080aa56e4",
         'page[size]': 20,
         'page[number]': 1
-
-        // 'filters[adults]': 1
-        // 'filters[nwlng]': 141.80570312500004,
-        // 'filters[nwlat]': -19.103175331900317,
-        // 'filters[selat]': -46.46778828042279,
-        // 'filters[selng]': 160.61429687500004
     };
-
-    // console.log("Initial API Parameters:", apiParams); 
 
     // Function to load properties based on page and view type
     function loadProperties(pageNumber, viewType) {
