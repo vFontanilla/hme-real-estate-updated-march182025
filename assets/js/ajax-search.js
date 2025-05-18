@@ -78,8 +78,7 @@ jQuery(document).ready(function ($) {
 
         const segmentBadge = segment ? `<span class="segment-badge">${segment}</span>` : '';
 
-        return `
-            <a id="property-link" href="${url}" class="property-tag" target="_blank" data-property-id="${property.id}">
+        return `            
                 <div class="property-card">
                     <div class="card">
                         <picture>
@@ -114,8 +113,7 @@ jQuery(document).ready(function ($) {
                             </div>
                         </div>
                     </div>
-                </div>
-            </a>
+                </div>           
         `;
     }
 
@@ -134,8 +132,7 @@ jQuery(document).ready(function ($) {
 
         const segmentBadge = segment ? `<span class="segment-badge">${segment}</span>` : '';
 
-        return `
-            <a id="property-link" href="${url}" class="property-tag" target="_blank" data-property-id="${property.id}">
+        return `           
                 <div class="property-cardss">
                     <div class="card d-flex flex-column flex-md-row flex-sm-column">
                         <div id="carousel-${property.id}" class="carousel slide property-carousel flex-shrink-0" data-bs-ride="carousel">
@@ -172,7 +169,6 @@ jQuery(document).ready(function ($) {
                         </div>
                     </div>
                 </div>
-            </a>
         `;
     }
 
